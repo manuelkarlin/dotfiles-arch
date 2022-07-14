@@ -16,6 +16,11 @@ if [ "$(id -u)" = 0 ]; then
     exit 1
 fi
 
+echo "################################################################"
+echo "## Syncing the repos and installing 'dialog' if not installed ##"
+echo "################################################################"
+sudo pacman --noconfirm --needed -Syu dialog || error "Error syncing the repos."
+
 error() { \
     clear; printf "ERROR:\\n%s\\n" "$1" >&2; exit 1;
 }

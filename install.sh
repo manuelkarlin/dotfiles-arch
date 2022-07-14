@@ -46,29 +46,39 @@ sudo chsh $USER -s "/bin/fish" &&
 echo -e "fish has been set as your default USER shell. \nLogging out is required for this take effect."
 
 # Copying config files
+echo "################################################################"
+echo "## Copying configuration files from /etc/dotfiles into \$HOME ##"
+echo "################################################################"
+[ ! -d /etc/dotfiles ] && sudo mkdir /etc/dotfiles
+[ -d /etc/dotfiles ] && mkdir ~/dotfiles-backup-$(date +%Y.%m.%d-%H%M) && cp -Rf /etc/dotfiles ~/dotfiles-backup-$(date +%Y.%m.%d-%H%M)
+[ ! -d ~/.config ] && mkdir ~/.config
+[ -d ~/.config ] && mkdir ~/.config-backup-$(date +%Y.%m.%d-%H%M) && cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H%M)
+cd /etc/dotfiles && cp -Rf . ~ && cd -
 
+# Change all scripts in .local/bin to be executable.
+find $HOME/.local/bin -type f -print0 | xargs -0 chmod 775
 
+echo "######################################"
+echo "## Enable lightdm as login manager. ##"
+echo "######################################"
 # Disable the current login manager
 sudo systemctl disable $(grep '/usr/s\?bin' /etc/systemd/system/display-manager.service | awk -F / '{print $NF}') || echo "Cannot disable current display manager."
 # Enable sddm as login manager
 sudo systemctl enable lightdm
-echo "######################################"
-echo "## Enable lightdm as login manager. ##"
-echo "######################################"
 
 # Copying themes
 
 
 # Installing AUR helper yay
+echo "######################################"
+echo "## Installing yay as AUR helper.    ##"
+echo "######################################"
 cd /opt/
 sudo git clone https://aur.archlinux.org/yay-git.git
 sudo chown -R $USER:$USER yay-git/
 cd yay-git
 makepkg -si
 cd ~/dotfiles-arch
-echo "######################################"
-echo "## Installing yay as AUR helper.    ##"
-echo "######################################"
 
 while true; do
     read -p "Do you want to reboot? [Y/n] " yn

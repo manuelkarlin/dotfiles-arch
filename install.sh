@@ -65,12 +65,11 @@ echo -e "fish has been set as your default USER shell. \nLogging out is required
 echo "################################################################"
 echo "## Copying configuration files from /etc/dotfiles into \$HOME ##"
 echo "################################################################"
-[ ! -d /etc/dotfiles ] && sudo mkdir /etc/dotfiles
-[ -d /etc/dotfiles ] && mkdir ~/dotfiles-backup-$(date +%Y.%m.%d-%H%M) && cp -Rf /etc/dotfiles ~/dotfiles-backup-$(date +%Y.%m.%d-%H%M)
+# [ ! -d /etc/dotfiles ] && sudo mkdir /etc/dotfiles
+# [ -d /etc/dotfiles ] && mkdir ~/dotfiles-backup-$(date +%Y.%m.%d-%H%M) && cp -Rf /etc/dotfiles ~/dotfiles-backup-$(date +%Y.%m.%d-%H%M)
 [ ! -d ~/.config ] && mkdir ~/.config
 [ -d ~/.config ] && mkdir ~/.config-backup-$(date +%Y.%m.%d-%H%M) && cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H%M)
-cp -Rf . /etc/dotfiles
-cd /etc/dotfiles && cp -Rf . ~ && cd -
+cp -Rf . ~
 
 # Change all scripts in .local/bin to be executable.
 find $HOME/.local/bin -type f -print0 | xargs -0 chmod 775

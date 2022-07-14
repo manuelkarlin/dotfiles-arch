@@ -69,7 +69,6 @@ signal-desktop
 speedtest-cli
 starship
 thunar
-timeshift
 traceroute
 ttf-fira-code
 udiskie

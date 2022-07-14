@@ -53,9 +53,9 @@ makepkg -si
 cd ~/dotfiles-arch
 
 echo "######################################"
-echo "## Installing AUR packages.     aq1   1    ##"
+echo "## Installing AUR packages.         ##"
 echo "######################################"
-yay -Sy nerd-fonts-fira-code
+yay --needed -Sy nerd-fonts-fira-code
 
 # Changing the default shell to fish.
 sudo chsh $USER -s "/bin/fish" &&
@@ -69,6 +69,7 @@ echo "################################################################"
 [ -d /etc/dotfiles ] && mkdir ~/dotfiles-backup-$(date +%Y.%m.%d-%H%M) && cp -Rf /etc/dotfiles ~/dotfiles-backup-$(date +%Y.%m.%d-%H%M)
 [ ! -d ~/.config ] && mkdir ~/.config
 [ -d ~/.config ] && mkdir ~/.config-backup-$(date +%Y.%m.%d-%H%M) && cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H%M)
+cp -Rf . /etc/dotfiles
 cd /etc/dotfiles && cp -Rf . ~ && cd -
 
 # Change all scripts in .local/bin to be executable.
@@ -84,6 +85,8 @@ sudo systemctl enable lightdm
 
 # Copying themes
 
+# Kvantum to change the default theme of Qt application
+echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile
 
 while true; do
     read -p "Do you want to reboot? [Y/n] " yn

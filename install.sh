@@ -41,6 +41,22 @@ grep -qs "ID=arch" /etc/os-release || distrowarning
 # Let's install each package listed in the pkglist.txt file.
 sudo pacman --needed --ask 4 -Sy - < pkglist.txt || error "Failed to install required packages."
 
+# Installing AUR helper yay
+echo "######################################"
+echo "## Installing yay as AUR helper.    ##"
+echo "######################################"
+cd /opt/
+sudo git clone https://aur.archlinux.org/yay-git.git
+sudo chown -R $USER:$USER yay-git/
+cd yay-git
+makepkg -si
+cd ~/dotfiles-arch
+
+echo "######################################"
+echo "## Installing AUR packages.     aq1   1    ##"
+echo "######################################"
+yay -Sy nerd-fonts-fira-code
+
 # Changing the default shell to fish.
 sudo chsh $USER -s "/bin/fish" &&
 echo -e "fish has been set as your default USER shell. \nLogging out is required for this take effect."
@@ -68,17 +84,6 @@ sudo systemctl enable lightdm
 
 # Copying themes
 
-
-# Installing AUR helper yay
-echo "######################################"
-echo "## Installing yay as AUR helper.    ##"
-echo "######################################"
-cd /opt/
-sudo git clone https://aur.archlinux.org/yay-git.git
-sudo chown -R $USER:$USER yay-git/
-cd yay-git
-makepkg -si
-cd ~/dotfiles-arch
 
 while true; do
     read -p "Do you want to reboot? [Y/n] " yn

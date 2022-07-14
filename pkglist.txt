@@ -70,7 +70,6 @@ speedtest-cli
 starship
 thunar
 traceroute
-ttf-fira-code
 udiskie
 unrar
 unzip

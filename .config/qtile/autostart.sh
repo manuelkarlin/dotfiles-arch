@@ -1,3 +1,8 @@
 #!/bin/sh
 picom &
-xrandr --output HDMI-1 --left-of eDP-1
+xrandr --output Virtual1 --mode 1920x1080 &
+setxkbmap es &
+nm-applet &
+udiskie -t &
+volumeicon &
+cbatticon &

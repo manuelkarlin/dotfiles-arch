@@ -1,29 +1,3 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -53,22 +27,13 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows
-    Key(
-        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
-    ),
-    Key(
-        [mod, "shift"],
-        "l",
-        lazy.layout.shuffle_right(),
-        desc="Move window to the right",
-    ),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key([mod, "shift"],"l",lazy.layout.shuffle_right(),desc="Move window to the right",),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Resize Windows
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key(
-        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
-    ),
+    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     # Reset window size
@@ -77,16 +42,11 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
+    Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
     # Terminal
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Browser
-    Key([mod], "b", lazy.spawn("brave-browser"), desc="Launch browser"),
+    Key([mod], "b", lazy.spawn("firefox"), desc="Launch browser"),
     # Application switcher
     Key([mod], "space", lazy.spawn("rofi -show"), desc="Launch Application Switcher"),
     # Application launcher
@@ -96,63 +56,23 @@ keys = [
     # Close current window
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     # Media Keys
-    Key(
-        [],
-        "XF86AudioLowerVolume",
-        lazy.spawn("amixer sset Master 2%-"),
-        desc="Lower volume",
-    ),
-    Key(
-        [],
-        "XF86AudioRaiseVolume",
-        lazy.spawn("amixer sset Master 2%+"),
-        desc="Raise volume",
-    ),
-    Key(
-        [],
-        "XF86AudioMute",
-        lazy.spawn("amixer -D pulse set Master toggle"),
-        desc="Mute volume",
-    ),
-    Key(
-        [],
-        "XF86AudioPlay",
-        lazy.spawn("playerctl play-pause"),
-        desc="Play or pause music",
-    ),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5")),
+    Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute")),
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play or pause music"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next track"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous track"),
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop"), desc="Stop track"),
     # Screen brightness
-    Key(
-        [],
-        "XF86MonBrightnessUp",
-        lazy.spawn("brightnessctl set +5%"),
-        desc="Raise screen brightness",
-    ),
-    Key(
-        [],
-        "XF86MonBrightnessDown",
-        lazy.spawn("brightnessctl set 5%-"),
-        desc="Lower screen brightness",
-    ),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%"), desc="Raise screen brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-"), desc="Lower screen brightness"),
     # Take a screenshot
     Key([], "Print", lazy.spawn("flameshot gui"), desc="Take a screenshot"),
     # Lock computer
     Key([mod], "z", lazy.spawn("dm-tool lock"), desc="Lock the Computer"),
     # Eject flash drive
-    Key(
-        [mod],
-        "e",
-        lazy.spawn("fish /home/mjs/.config/qtile/eject.fish"),
-        desc="Eject flash drive '/dev/sdb1'",
-    ),
-    Key(
-        [mod, "control"],
-        "p",
-        lazy.spawn("fish /home/mjs/.config/qtile/reset_picom.fish"),
-        desc="Restart the compositor",
-    ),
+    Key([mod], "e", lazy.spawn("fish /home/mjs/.config/qtile/eject.fish"), desc="Eject flash drive '/dev/sdb1'"),
+    Key([mod, "control"], "p", lazy.spawn("fish /home/mjs/.config/qtile/reset_picom.fish"), desc="Restart the compositor"),
     # Qtile controls
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -166,19 +86,9 @@ for g, k in zip(groups, group_hotkeys):
     keys.extend(
         [
             # mod1 + letter of group = switch to group
-            Key(
-                [mod],
-                k,
-                lazy.group[g.name].toscreen(),
-                desc=f"Switch to group {g.name}",
-            ),
+            Key([mod], k, lazy.group[g.name].toscreen(), desc=f"Switch to group {g.name}"),
             # mod1 + shift + letter of group = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                k,
-                lazy.window.togroup(g.name, switch_group=False),
-                desc=f"Switch to & move focused window to group {g.name}",
-            ),
+            Key([mod, "shift"], k, lazy.window.togroup(g.name, switch_group=False), desc=f"Switch to & move focused window to group {g.name}"),
             # Or, use below if you prefer not to switch to that group.
             # # mod1 + shift + letter of group = move focused window to group
             # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
@@ -233,7 +143,7 @@ layouts = [
 
 
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font",
+    font="FiraCode Nerd Font",
     fontsize=16,
     padding=3,
     foreground=catppuccin["black1"],

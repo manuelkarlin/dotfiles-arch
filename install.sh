@@ -70,6 +70,8 @@ echo "################################################################"
 [ ! -d ~/.config ] && mkdir ~/.config
 [ -d ~/.config ] && mkdir ~/.config-backup-$(date +%Y.%m.%d-%H%M) && cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H%M)
 cp -Rf . ~
+rm -f ~/install.sh
+rm -f ~/pkglist.txt
 
 # Change all scripts in .local/bin to be executable.
 find $HOME/.local/bin -type f -print0 | xargs -0 chmod 775
@@ -83,7 +85,9 @@ sudo systemctl disable $(grep '/usr/s\?bin' /etc/systemd/system/display-manager.
 sudo systemctl enable lightdm
 
 # Copying themes
-
+sudo cp -f ./lightdm/lightdm.conf /etc/lightdm/lightdm.conf
+sudo cp -f ./lightdm/lightdm-webkit2-greeter.conf /etc/lightdm/lightdm-webkit2-greeter.conf
+sudo cp -f ./lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 # Kvantum to change the default theme of Qt application
 echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile
 

@@ -72,6 +72,8 @@ echo "################################################################"
 cp -Rf . ~
 rm -f ~/install.sh
 rm -f ~/pkglist.txt
+rm -drf ~/.git
+
 
 # Change all scripts in .local/bin to be executable.
 find $HOME/.local/bin -type f -print0 | xargs -0 chmod 775
@@ -87,7 +89,7 @@ sudo systemctl enable lightdm
 # Copying themes
 sudo cp -f ./.config/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
 sudo cp -f ./.config/lightdm/lightdm-webkit2-greeter.conf /etc/lightdm/lightdm-webkit2-greeter.conf
-sudo cp -f ./.config/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+# sudo cp -f ./.config/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 # Kvantum to change the default theme of Qt application
 echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile
 

@@ -85,9 +85,9 @@ sudo systemctl disable $(grep '/usr/s\?bin' /etc/systemd/system/display-manager.
 sudo systemctl enable lightdm
 
 # Copying themes
-sudo cp -f ./lightdm/lightdm.conf /etc/lightdm/lightdm.conf
-sudo cp -f ./lightdm/lightdm-webkit2-greeter.conf /etc/lightdm/lightdm-webkit2-greeter.conf
-sudo cp -f ./lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+sudo cp -f ./.config/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
+sudo cp -f ./.config/lightdm/lightdm-webkit2-greeter.conf /etc/lightdm/lightdm-webkit2-greeter.conf
+sudo cp -f ./.config/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 # Kvantum to change the default theme of Qt application
 echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile
 

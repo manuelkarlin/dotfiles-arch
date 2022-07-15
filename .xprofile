@@ -1,8 +1,8 @@
 xrandr --output Virtual1 --primary --mode 1920x1080 --pos 0x0 &
 picom &
-setxkbmap es &
+setxkbmap de &
 nm-applet &
 udiskie -t &
 volumeicon &
 cbatticon &
-nitrogen ~/wallpaper/oriental-fantasia.jpg
+nitrogen --restore &
